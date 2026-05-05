@@ -1,0 +1,25 @@
+{
+  "mape": 0.1994,
+  "rmse": 42.78,
+  "r2": 0.8284,
+  "mape_pct": "19.9%",
+  "n_train": 3328,
+  "n_test": 833,
+  "n_total": 4161,
+  "feature_importances": {
+    "bedrooms": 0.4990268222876815,
+    "accommodates": 0.15610763382365753,
+    "review_scores_rating": 0.07049825507481462,
+    "minimum_nights": 0.02708454668041159,
+    "distance_to_event_km": 0.11485538382751125,
+    "is_event_nearby": 0.0,
+    "is_sports": 0.002287567157467731,
+    "temp_avg_c": 0.016047519308598487,
+    "precipitation_mm": 0.08609159520284053,
+    "is_outdoor_season": 0.0034148522131770107,
+    "is_peak_summer": 0.003982841249583987,
+    "room_type_Hotel room": 0.0016313227203629437,
+    "room_type_Private room": 0.009616905550419625,
+    "room_type_Shared room": 0.009354754903473105
+  }
+}

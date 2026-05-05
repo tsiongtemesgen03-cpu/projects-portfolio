@@ -1,0 +1,13 @@
+flask
+pandas
+numpy
+matplotlib
+scikit-learn
+anthropic
+sentence-transformers
+torch
+requests
+folium
+python-dotenv
+gunicorn
+torch
