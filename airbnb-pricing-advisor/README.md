@@ -19,15 +19,21 @@ source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 3. Set API Key
+### 3. Set Environment Variables (Azure OpenAI)
 **macOS/Linux:**
 ```bash
+export AZURE_OPENAI_ENDPOINT="https://your-resource.openai.azure.com"
+export AZURE_OPENAI_API_VERSION="2025-04-01-preview"
 export AZURE_OPENAI_API_KEY="your_api_key_here"
+export AZURE_OPENAI_DEPLOYMENT_ID="your_model_deployment"
 ```
 
 **Windows (PowerShell):**
 ```powershell
+$env:AZURE_OPENAI_ENDPOINT="https://your-resource.openai.azure.com"
+$env:AZURE_OPENAI_API_VERSION="2025-04-01-preview"
 $env:AZURE_OPENAI_API_KEY="your_api_key_here"
+$env:AZURE_OPENAI_DEPLOYMENT_ID="your_model_deployment"
 ```
 
 ### 4. Build RAG Index
@@ -50,7 +56,7 @@ Open browser: **http://localhost:5001**
 
 - RAG-powered semantic search over listings and reviews  
 - Dynamic pricing recommendations (RAISE / DISCOUNT / HOLD)  
-- AI chatbot (Claude) for natural language insights  
+- AI chatbot (Open AI) for natural language insights  
 - Interactive dashboard with KPIs and charts  
 - Event-aware pricing optimization  
 - Neighborhood-level opportunity detection  
@@ -64,22 +70,28 @@ Note: Some charts use simulated data for demonstration purposes.
 ```
 airbnb-rag-advisor/
 ├── app.py
-├── build_index.py
 ├── chatbot_rag.py
-├── requirements.txt
-├── index.pkl
-├── data/
-├── static/
-├── templates/
+├── build_index.py
 ├── model.py
 ├── simulator.py
 ├── recommend.py
-├── fetch_*.py
+├── requirements.txt
+├── index.pkl
+├── model_metrics.json
+├── simulator_model.pkl
+├── airbnb_pricing_advisor.ipynb
+├── data/
+│   ├── listings.csv
+│   ├── merged_data.csv
+│   ├── events_*.csv / .json
+├── static/
+├── templates/
+├── fetch_events_*.py
+├── fetch_weather_*.py
 ├── merge_*.py
+├── pricing_recommendations.csv
+└── pricing_charts.png
 ```
-
----
-
 ## System Architecture
 
 ### RAG Pipeline
@@ -93,7 +105,7 @@ CSV → Text chunks → Embeddings → index.pkl
 ### Retrieval and AI
 - Retrieves relevant documents via cosine similarity  
 - Builds structured context  
-- Sends context to Claude API  
+- Sends context to OpenAI API  
 
 ### Flask Application
 - Loads data, models, and RAG index  
@@ -195,7 +207,7 @@ with open('index.pkl', 'rb') as f:
 
 ### HIGH
 
-**4. No Input Validation** - User queries sent directly to Claude without sanitization  
+**4. No Input Validation** - User queries sent directly to OpenAI API without sanitization  
 **5. Missing CSRF Protection** - No Flask-WTF CSRF tokens on forms  
 **6. Session Cookies Not Secure** - Missing `secure=True`, `httponly=True`, `samesite='Lax'`  
 **7. Giant Inline HTML Template** - 2500+ lines in memory, makes XSS harder to audit
@@ -228,7 +240,7 @@ pip install --force-reinstall -r requirements.txt
 python build_index.py
 ```
 
-### Claude API Key Error
+### OpenAI API Key Error
 ```bash
 # Check environment variable
 echo $AZURE_OPENAI_API_KEY  # macOS/Linux
@@ -318,7 +330,6 @@ id, name, neighbourhood, price, latitude, longitude, reviews_per_month, ...
 
 ---
 
-## Author
-
-Airbnb Pricing Advisor Project  
-April 2026
+## Authors
+  
+Airbnb Pricing Advisor Project – April 2026
